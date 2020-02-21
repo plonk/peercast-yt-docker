@@ -8,7 +8,7 @@ PeerCast YT の Docker コンテナを作ってみました。`plonk/peercast-yt
 起動してみましょう。初回起動時は Docker イメージのダウンロードが行われ
 ます。終了は `Ctrl+C` でできます。
 
-    $ docker run -it --net=host plonk/peercast-yt:latest
+    $ docker run -it --net=host plonk/peercast-yt:0.3.0
     (...)
     Running with default configuration
 
@@ -30,7 +30,7 @@ peercast-yt のコンテナを以下のように起動します。これで
 `/home/user/config` とコンテナ内の `/root/config` がリンクされた状態に
 なります。
 
-    $ docker run -it --net=host -v /home/user/config:/root/config plonk/peercast-yt:0.0.9
+    $ docker run -it --net=host -v /home/user/config:/root/config plonk/peercast-yt:0.3.0
     Running with default configuration
     ^C
 
@@ -42,6 +42,6 @@ peercast-yt のコンテナを以下のように起動します。これで
 次回からは `/home/user/config/peercast.ini` から設定が読み込まれるよう
 になります。
 
-    $ docker run -it --net=host -v /home/plonk/config:/root/config plonk/peercast-yt:0.0.9
+    $ docker run -it --net=host -v /home/plonk/config:/root/config plonk/peercast-yt:0.3.0
     Running with user configuration: /root/config/peercast.ini
     ^CSaving configuration: /root/config/peercast.ini
