@@ -16,12 +16,17 @@ RUN make -j4
 # -----------------------------------------------------
 FROM ubuntu:latest as deploy-stage
 COPY --from=build-stage /root/peercast-yt-0.3.1/ui/linux/peercast-yt /root/peercast-yt
-RUN apt-get update && apt-get install -y python3 ffmpeg librtmp1 && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+RUN	apt-get update && \
+	apt-get install -y python3 ffmpeg librtmp1 && \
+	apt-get clean && \ 
+	rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && \
+	mkdir /root/config && \
+	ln -s /root/config/peercast.ini /root/peercast-yt/peercast.ini
 
-ADD peercast.ini /root/peercast-yt
+ADD peercast.ini /root/peercast-yt/peercast.ini.default
 ADD run.sh /root
-RUN mkdir -p /root/config
 
+VOLUME ["/root/config"]
+EXPOSE 7144
 WORKDIR /root
-
 CMD ["/root/run.sh"]
